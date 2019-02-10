@@ -3,6 +3,7 @@ export enum ActionType {
 
     LOAD_SEARCH_RESULTS,
     LOAD_SEARCH_RESULTS_FULFILLED,
+    LOAD_SEARCH_RESULTS_REJECTED,
 }
 
 export interface ReduxAction {
@@ -32,6 +33,27 @@ export const reducer = (state = INITIAL_STATE, action: ReduxAction): ReduxState 
                 searchQuery,
                 searchResults: []
             };
+
+        case ActionType.LOAD_SEARCH_RESULTS:
+            return {
+                ...state,
+                isLoading: true
+            };
+
+        case ActionType.LOAD_SEARCH_RESULTS_FULFILLED:
+            return {
+                ...state,
+                isLoading: false,
+                searchResults: action.payload.results
+            }
+
+        case ActionType.LOAD_SEARCH_RESULTS_REJECTED:
+            console.log('rejected');
+            return {
+                ...state,
+                isLoading: false,
+                searchResults: []
+            }
 
         default: {
             return state;
