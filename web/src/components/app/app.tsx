@@ -1,12 +1,12 @@
 import * as React from 'react'
 import { useState, useEffect } from 'react';
 import { Subject, Observable, of } from 'rxjs';
-import { scan, startWith, map, switchMap, catchError, takeUntil } from 'rxjs/operators';
+import { scan, startWith, map, switchMap, catchError, takeUntil, filter } from 'rxjs/operators';
 import { ajax, AjaxError } from 'rxjs/ajax';
 
 import { reducer, INITIAL_STATE, ReduxAction, ActionType } from '../../reducers';
 import { SearchForm } from '../search-form';
-import { combineEffects, ofType } from '../effects/utils';
+import { combineEffects, ofType } from '../../effects/utils';
 
 import './app.scss';
 
@@ -23,6 +23,7 @@ export const App: React.StatelessComponent<{}> = () => {
 
         const queryChangeEffect$: Observable<ReduxAction> = action$.pipe(
             ofType(ActionType.CHANGE_SEARCH_QUERY),
+            filter(({ payload }) => payload.searchQuery),
             map(({ payload }) => ({
                 type: ActionType.LOAD_SEARCH_RESULTS,
                 payload
