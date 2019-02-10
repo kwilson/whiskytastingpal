@@ -6,7 +6,8 @@
     "rules": {
         "jsx-no-multiline-js": false,
         "no-submodule-imports": [
-            true
+            true,
+            "rxjs"
         ],
         "trailing-comma": false,
         "quotemark": [
