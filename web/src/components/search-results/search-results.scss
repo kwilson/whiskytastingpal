@@ -1,0 +1,28 @@
+.SearchResults {
+    .search-result {
+        &__image {
+            display: flex;
+            flex: 0 0 140px;
+            justify-content: center;
+        }
+
+        &__meta {
+            $labelWidth: 120px;
+
+            display: flex;
+            flex-wrap: wrap;
+
+            &-label {
+                width: $labelWidth;
+
+                &::after {
+                    content: ': ';
+                }
+            }
+
+            &-value {
+                flex: 0 1 calc(100% - #{$labelWidth});
+            }
+        }
+    }
+}

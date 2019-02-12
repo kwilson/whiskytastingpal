@@ -9,6 +9,7 @@ import { SearchForm } from '../search-form';
 import { combineEffects, ofType } from '../../effects/utils';
 
 import './app.scss';
+import { SearchResults } from '../search-results';
 
 const action$ = new Subject<ReduxAction>();
 
@@ -94,6 +95,16 @@ export const App: React.StatelessComponent<{}> = () => {
                     onChangeValue={onChangeValue}
                 />
             </section>
+
+            {state.searchResults.length > 0 && (
+                <section className="section">
+                    <SearchResults
+                        searchResults={state.searchResults}
+                        onCancel={() => null}
+                        onSelect={() => null}
+                    />
+                </section>
+            )}
 
             <pre>
                 {JSON.stringify(state, null, 2)}

@@ -1,3 +1,5 @@
+import { ISearchResult } from '../types/search-result';
+
 export enum ActionType {
     CHANGE_SEARCH_QUERY,
 
@@ -13,7 +15,7 @@ export interface ReduxAction {
 
 export interface ReduxState {
     searchQuery: string;
-    searchResults: any[];
+    searchResults: ISearchResult[];
     isLoading: boolean;
 }
 
@@ -48,7 +50,6 @@ export const reducer = (state = INITIAL_STATE, action: ReduxAction): ReduxState 
             }
 
         case ActionType.LOAD_SEARCH_RESULTS_REJECTED:
-            console.log('rejected');
             return {
                 ...state,
                 isLoading: false,
