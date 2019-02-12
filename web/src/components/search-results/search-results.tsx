@@ -16,7 +16,10 @@ const getMeta = (label: string, value: string) => (
     </>
 )
 
-const getSearchResult = (searchResult: ISearchResult) => {
+const getSearchResult = (
+    searchResult: ISearchResult,
+    onSelect: (searchResult: ISearchResult) => void
+) => {
     const getImageUrl = (url: string) => 'https://www.masterofmalt.com' + url.replace('IMAGEPRESET', '2812');
 
     const meta = [
@@ -24,8 +27,10 @@ const getSearchResult = (searchResult: ISearchResult) => {
         { label: 'Distillery', value: searchResult.distillery}
     ].map(({ label, value }) => getMeta(label, value));
 
+    const onClick = () => onSelect(searchResult);
+
     return (
-        <div className="box">
+        <div className="box search-result" onClick={onClick}>
             <article className="media search-result">
                 <div className="search-result__image">
                     <figure className="image">
@@ -50,11 +55,11 @@ const getSearchResult = (searchResult: ISearchResult) => {
 export const SearchResults: React.StatelessComponent<IProps> = (props) => {
     return (
         <div className="container SearchResults">
-            {props.searchResults.map(getSearchResult)}
+            {props.searchResults.map((x) => getSearchResult(x, props.onSelect))}
 
             <hr />
 
-            <button className="button">Cancel</button>
+            <button className="button" onClick={props.onCancel}>Clear</button>
         </div>
     );
 };

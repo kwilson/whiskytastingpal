@@ -1,5 +1,7 @@
 .SearchResults {
     .search-result {
+        cursor: pointer;
+
         &__image {
             display: flex;
             flex: 0 0 140px;
