@@ -23,7 +23,7 @@ def search(terms):
     )
 
     return get_search_results(r.json())
-    
+
 def get_search_results(results):
     return list(map(get_search_result, results["body"]))
 
@@ -50,13 +50,40 @@ def get_query_body(terms):
         ],
         "_source": {
             "include": [
+                "id",
+                "price",
+                "tradeprice",
                 "title",
+                "description",
                 "url",
                 "abv",
                 "volume",
                 "age",
+                "stocklevel",
+                "hasdram",
                 "productimage",
-                "distillery"
+                "atomstock",
+                "distilleryurl",
+                "isdiscontinued",
+                "comingsoon",
+                "stockincoming",
+                "distillery",
+                "releasedate",
+                "isvatableproduct",
+                "hasfreeshipping",
+                "hasfreeshippingworldwide",
+                "hasActiveLightningDeal",
+                "discountFlag",
+                "rRP",
+                "previousPrice",
+                "userrating",
+                "preorder",
+                "maxnumberpercustomer",
+                "reviewcount",
+                "rRP",
+                "isDiscounted",
+                "previousPrice",
+                "discountFlag"
             ]
         },
         "query": {
@@ -160,6 +187,257 @@ def get_query_body(terms):
                                 }
                             ],
                             "boost_mode": "replace"
+                        }
+                    }
+                ]
+            }
+        },
+        "aggs": {
+            "stocklevel": {
+                "filter": {
+                    "and": {
+                        "filters": [
+                            {
+                                "terms": {
+                                    "targettemplateid": [
+                                        "1759"
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                "aggs": {
+                    "aggregateName": {
+                        "terms": {
+                            "field": "stocklevel",
+                            "size": 2
+                        }
+                    }
+                }
+            },
+            "hasdram": {
+                "filter": {
+                    "and": {
+                        "filters": [
+                            {
+                                "terms": {
+                                    "targettemplateid": [
+                                        "1759"
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                "aggs": {
+                    "aggregateName": {
+                        "terms": {
+                            "field": "hasdram",
+                            "size": 2
+                        }
+                    }
+                }
+            },
+            "atomstock": {
+                "filter": {
+                    "and": {
+                        "filters": [
+                            {
+                                "terms": {
+                                    "targettemplateid": [
+                                        "1759"
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                "aggs": {
+                    "aggregateName": {
+                        "terms": {
+                            "field": "atomstock",
+                            "size": 2
+                        }
+                    }
+                }
+            },
+            "hasfreeshipping": {
+                "filter": {
+                    "and": {
+                        "filters": [
+                            {
+                                "terms": {
+                                    "targettemplateid": [
+                                        "1759"
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                "aggs": {
+                    "aggregateName": {
+                        "terms": {
+                            "field": "hasfreeshipping",
+                            "size": 2
+                        }
+                    }
+                }
+            },
+            "isDiscounted": {
+                "filter": {
+                    "and": {
+                        "filters": [
+                            {
+                                "terms": {
+                                    "targettemplateid": [
+                                        "1759"
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                "aggs": {
+                    "aggregateName": {
+                        "terms": {
+                            "field": "isDiscounted",
+                            "size": 2
+                        }
+                    }
+                }
+            },
+            "targettemplates": {
+                "terms": {
+                    "field": "targettemplate_agg",
+                    "size": 0
+                }
+            },
+            "styles": {
+                "filter": {
+                    "and": {
+                        "filters": [
+                            {
+                                "terms": {
+                                    "targettemplateid": [
+                                        "1759"
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                "aggs": {
+                    "aggregateName": {
+                        "terms": {
+                            "field": "style_agg",
+                            "size": 20
+                        }
+                    }
+                }
+            },
+            "countries": {
+                "filter": {
+                    "and": {
+                        "filters": [
+                            {
+                                "terms": {
+                                    "targettemplateid": [
+                                        "1759"
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                "aggs": {
+                    "aggregateName": {
+                        "terms": {
+                            "field": "country_agg",
+                            "size": 20
+                        }
+                    }
+                }
+            },
+            "regions": {
+                "filter": {
+                    "and": {
+                        "filters": [
+                            {
+                                "terms": {
+                                    "targettemplateid": [
+                                        "1759"
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                "aggs": {
+                    "aggregateName": {
+                        "terms": {
+                            "field": "region_agg",
+                            "size": 20
+                        }
+                    }
+                }
+            },
+            "distilleries": {
+                "filter": {
+                    "and": {
+                        "filters": [
+                            {
+                                "terms": {
+                                    "targettemplateid": [
+                                        "1759"
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                "aggs": {
+                    "aggregateName": {
+                        "terms": {
+                            "field": "distillery_agg",
+                            "size": 20
+                        }
+                    }
+                }
+            },
+            "bottlesizes": {
+                "filter": {
+                    "and": {
+                        "filters": [
+                            {
+                                "terms": {
+                                    "targettemplateid": [
+                                        "1759"
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                "aggs": {
+                    "aggregateName": {
+                        "terms": {
+                            "field": "volume",
+                            "size": 20
+                        }
+                    }
+                }
+            }
+        },
+        "post_filter": {
+            "and": {
+                "filters": [
+                    {
+                        "terms": {
+                            "targettemplateid": [
+                                "1759"
+                            ]
                         }
                     }
                 ]
