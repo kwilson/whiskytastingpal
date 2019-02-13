@@ -38,7 +38,7 @@ export const App: React.StatelessComponent<{}> = () => {
             ofType(ActionType.LOAD_SEARCH_RESULTS),
             map((action) => action.payload.searchQuery),
             switchMap(
-                (searchQuery: string) => ajax.getJSON(`http://localhost:5000/search/${searchQuery}`).pipe(
+                (searchQuery: string) => ajax.getJSON(`/api/search?terms=${searchQuery}`).pipe(
                     map((results) => ({
                         type: ActionType.LOAD_SEARCH_RESULTS_FULFILLED,
                         payload: {
@@ -70,7 +70,7 @@ export const App: React.StatelessComponent<{}> = () => {
             ofType(ActionType.LOAD_DETAILS),
             map((action) => action.payload.selectedResult.url),
             switchMap(
-                (url: string) => ajax.getJSON(`http://localhost:5000/${url}`).pipe(
+                (url: string) => ajax.getJSON(`/api/${url}`).pipe(
                     map((results) => ({
                         type: ActionType.LOAD_DETAILS_FULFILLED,
                         payload: {
