@@ -33,7 +33,7 @@ export const SearchForm: React.StatelessComponent<IProps> = ({ defaultSearchQuer
                 <div className="control">
                     <button className="button is-info is-large">
                         Search
-                        </button>
+                    </button>
                 </div>
             </div>
         </form>

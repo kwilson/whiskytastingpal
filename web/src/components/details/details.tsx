@@ -21,6 +21,10 @@ export const Details: React.StatelessComponent<IProps> = ({ details, onClose }) 
             </>
         ))}
 
+        {details.tastingNotes.length === 0 && (
+            <p>No tasting notes for this one, sorry.</p>
+        )}
+
         <img className="Details__image" src={details.image} alt="" />
 
         <hr />
