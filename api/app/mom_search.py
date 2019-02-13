@@ -1,6 +1,6 @@
 import requests
 
-def search(terms):
+def search(terms: str):
     url = "https://www.masterofmalt.com/api/search/products/-1/true/464/0/"
     headers = {
         "accept": "application/json",
@@ -37,7 +37,7 @@ def get_search_result(result):
         "abv": source["abv"],
     }
 
-def get_query_body(terms):
+def get_query_body(terms: str):
     return {
         "from": 0,
         "size": 10,
