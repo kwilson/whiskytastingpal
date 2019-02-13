@@ -170,10 +170,6 @@ export const App: React.StatelessComponent<{}> = () => {
                     />
                 </section>
             )}
-
-            <pre>
-                {JSON.stringify(state, null, 2)}
-            </pre>
         </>
     );
 };
