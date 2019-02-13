@@ -32,5 +32,6 @@ def get_tasting_note(tasting_note):
     title = tasting_note.find("b").text.strip()
     value = tasting_note.find("b").next_sibling.string.strip()
     return {
-        title: value
+        "title": title,
+        "value": value
     }

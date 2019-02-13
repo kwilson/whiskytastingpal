@@ -1,13 +1,13 @@
 import { merge, Observable } from 'rxjs';
-import { ReduxAction, ActionType } from '../../reducers';
 import { filter } from 'rxjs/operators';
+import { ActionType, ReduxAction } from '../reducers';
 
 export function combineEffects<T>(...effects: Array<Observable<T>>) {
     return merge(...effects);
 }
 
-export function ofType(type: ActionType) {
+export function ofType(...types: ActionType[]) {
     return (action: Observable<ReduxAction>) => action.pipe(
-        filter((x) => x.type === type)
+        filter((x) => types.includes(x.type))
     );
 }
