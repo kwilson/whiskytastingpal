@@ -10,10 +10,10 @@ interface IProps {
 }
 
 const getMeta = (label: string, value: string) => (
-    <>
+    <React.Fragment key={label}>
         <dt className="search-result__meta-label">{label}</dt>
         <dt className="search-result__meta-value">{value}</dt>
-    </>
+    </React.Fragment>
 )
 
 const getSearchResult = (
@@ -30,7 +30,7 @@ const getSearchResult = (
     const onClick = () => onSelect(searchResult);
 
     return (
-        <div className="box search-result" onClick={onClick}>
+        <div className="box search-result" onClick={onClick} key={searchResult.url}>
             <article className="media search-result">
                 <div className="search-result__image">
                     <figure className="image">
@@ -59,7 +59,10 @@ export const SearchResults: React.StatelessComponent<IProps> = (props) => {
 
             <hr />
 
-            <button className="button" onClick={props.onCancel}>Clear</button>
+            <button
+                className="button"
+                onClick={props.onCancel}
+            >Clear</button>
         </div>
     );
 };

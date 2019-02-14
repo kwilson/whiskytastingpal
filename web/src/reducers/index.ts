@@ -1,27 +1,6 @@
 import { ISearchResult } from '../types/search-result';
 import { IDetails } from '../types/details';
-
-export enum ActionType {
-    CHANGE_SEARCH_QUERY,
-
-    LOAD_SEARCH_RESULTS,
-    LOAD_SEARCH_RESULTS_FULFILLED,
-    LOAD_SEARCH_RESULTS_REJECTED,
-
-    LOAD_DETAILS,
-    LOAD_DETAILS_FULFILLED,
-    LOAD_DETAILS_REJECTED,
-
-    SHOW_RESULT,
-    HIDE_RESULT,
-
-    CLEAR
-}
-
-export interface ReduxAction {
-    type: ActionType;
-    payload?: any;
-}
+import { ReduxAction, ActionType } from '../actions';
 
 export interface ReduxState {
     searchQuery: string;

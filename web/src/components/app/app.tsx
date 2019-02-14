@@ -4,15 +4,17 @@ import { Subject, Observable, of } from 'rxjs';
 import { scan, startWith, map, switchMap, catchError, takeUntil, filter } from 'rxjs/operators';
 import { ajax, AjaxError } from 'rxjs/ajax';
 
-import { reducer, INITIAL_STATE, ReduxAction, ActionType } from '../../reducers';
+import { reducer, INITIAL_STATE } from '../../reducers';
 import { SearchForm } from '../search-form';
 import { combineEffects, ofType } from '../../effects/utils';
 import { SearchResults } from '../search-results';
 import { ISearchResult } from '../../types/search-result';
 import { Loader } from '../loader';
+import { Details } from '../details';
+import { loadSearchResults, loadSearchResultsFulfilled, loadSearchResultsRejected, loadDetails, loadDetailsFulfilled, loadDetailsRejected, changeSearchQuery, hideResult, showResult, clear, ReduxAction, ActionType } from '../../actions';
+import { IDetails } from '../../types/details';
 
 import './app.scss';
-import { Details } from '../details';
 
 const action$ = new Subject<ReduxAction>();
 
@@ -28,55 +30,37 @@ export const App: React.StatelessComponent<{}> = () => {
         const queryChangeEffect$: Observable<ReduxAction> = action$.pipe(
             ofType(ActionType.CHANGE_SEARCH_QUERY),
             filter(({ payload }) => payload.searchQuery),
-            map(({ payload }) => ({
-                type: ActionType.LOAD_SEARCH_RESULTS,
-                payload
-            }))
+            map(({ payload }) => loadSearchResults(payload.searchQuery))
         );
 
         const loadSearchResultsEffect$: Observable<ReduxAction> = action$.pipe(
             ofType(ActionType.LOAD_SEARCH_RESULTS),
             map((action) => action.payload.searchQuery),
             switchMap(
-                (searchQuery: string) => ajax.getJSON(`/api/search?terms=${searchQuery}`).pipe(
-                    map((results) => ({
-                        type: ActionType.LOAD_SEARCH_RESULTS_FULFILLED,
-                        payload: {
-                            results
-                        }
-                    })),
+                (searchQuery: string) => ajax.getJSON<ISearchResult[]>(`/api/search?terms=${searchQuery}`).pipe(
+                    map((results) => loadSearchResultsFulfilled(results)),
                     takeUntil(action$.pipe(
                         ofType(
                             ActionType.LOAD_SEARCH_RESULTS,
                             ActionType.CLEAR
                         )
                     )),
-                    catchError((_: AjaxError) => of({
-                        type: ActionType.LOAD_SEARCH_RESULTS_REJECTED
-                    }))
+                    catchError((_: AjaxError) => loadSearchResultsRejected)
                 )
             )
         );
 
         const selectResultEffect$: Observable<ReduxAction> = action$.pipe(
             ofType(ActionType.SHOW_RESULT),
-            map(({ payload }) => ({
-                type: ActionType.LOAD_DETAILS,
-                payload
-            }))
+            map(({ payload }) => loadDetails(payload.selectedResult))
         );
 
         const loadDetailsEfect$: Observable<ReduxAction> = action$.pipe(
             ofType(ActionType.LOAD_DETAILS),
             map((action) => action.payload.selectedResult.url),
             switchMap(
-                (url: string) => ajax.getJSON(`/api/${url}`).pipe(
-                    map((results) => ({
-                        type: ActionType.LOAD_DETAILS_FULFILLED,
-                        payload: {
-                            results
-                        }
-                    })),
+                (url: string) => ajax.getJSON<IDetails>(`/api/${url}`).pipe(
+                    map((details) => loadDetailsFulfilled(details)),
                     takeUntil(action$.pipe(
                         ofType(
                             ActionType.LOAD_DETAILS,
@@ -84,9 +68,7 @@ export const App: React.StatelessComponent<{}> = () => {
                             ActionType.CLEAR
                         )
                     )),
-                    catchError((_: AjaxError) => of({
-                        type: ActionType.LOAD_DETAILS_REJECTED
-                    }))
+                    catchError((_: AjaxError) => loadDetailsRejected)
                 )
             )
         );
@@ -109,29 +91,17 @@ export const App: React.StatelessComponent<{}> = () => {
         };
     }, []);
 
+    const dispatch = (action: ReduxAction) => action$.next(action);
+
     const onChangeValue = (searchQuery: string) =>
-        action$.next({
-            type: ActionType.CHANGE_SEARCH_QUERY,
-            payload: {
-                searchQuery
-            }
-        });
+        dispatch(changeSearchQuery(searchQuery));
 
     const onSelectResult = (selectedResult: ISearchResult) =>
-        action$.next({
-            type: ActionType.SHOW_RESULT,
-            payload: {
-                selectedResult
-            }
-        });
+        dispatch(showResult(selectedResult));
 
-    const onClear = () => action$.next({
-        type: ActionType.CLEAR
-    });
+    const onClear = () => dispatch(clear());
 
-    const onClose = () => action$.next({
-        type: ActionType.HIDE_RESULT
-    });
+    const onClose = () => dispatch(hideResult());
 
     return (
         <>

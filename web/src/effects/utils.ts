@@ -1,6 +1,6 @@
 import { merge, Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
-import { ActionType, ReduxAction } from '../reducers';
+import { ActionType, ReduxAction } from '../actions';
 
 export function combineEffects<T>(...effects: Array<Observable<T>>) {
     return merge(...effects);
