@@ -1,6 +1,7 @@
 version: '3'
 services:
   web:
+    image: momscraper-web
     build: ./web
     depends_on:
         - api
@@ -9,6 +10,5 @@ services:
     volumes:
       - ./web/dist:/var/www
   api:
+    image: momscraper-api
     build: ./api
-    ports:
-     - "5000:80"
