@@ -1,5 +1,5 @@
 import { ISearchResult } from "../types/search-result";
-import { IDetails } from "../types/details";
+import { IExtendedDetails } from "../types/details";
 
 export interface ReduxAction {
     type: ActionType;
@@ -89,11 +89,11 @@ export const loadDetails = (selectedResult: ISearchResult): ILoadDetailsAction =
 export interface ILoadDetailsFulfilledAction extends ReduxAction {
     type: ActionType.LOAD_DETAILS_FULFILLED;
     payload: {
-        results: IDetails
+        results: IExtendedDetails
     };
 }
 
-export const loadDetailsFulfilled = (details: IDetails): ILoadDetailsFulfilledAction => ({
+export const loadDetailsFulfilled = (details: IExtendedDetails): ILoadDetailsFulfilledAction => ({
     type: ActionType.LOAD_DETAILS_FULFILLED,
     payload: {
         results: details

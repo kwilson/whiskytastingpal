@@ -39,7 +39,7 @@ export const loadDetailsEfect$ = (action$: Observable<Actions>): Observable<Acti
     map((action) => action.payload.selectedResult.url),
     switchMap(
         (url: string) => ajax.getJSON<IDetails>(`/api/${url}`).pipe(
-            map((details) => loadDetailsFulfilled(details)),
+            map((details) => loadDetailsFulfilled({ ...details, url })),
             takeUntil(action$.pipe(
                 ofType(
                     ActionType.LOAD_DETAILS,

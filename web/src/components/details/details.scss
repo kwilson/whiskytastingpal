@@ -2,10 +2,13 @@
     align-items: center;
     display: flex;
     flex-direction: column;
-    position: relative;
 
-    .content {
+    &__content {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
         max-width: 420px;
+        position: relative;
         text-align: center;
     }
 
@@ -17,5 +20,9 @@
         top: 0;
         width: auto;
         z-index: -1;
+    }
+
+    &__divider {
+        width: 80%;
     }
 }
