@@ -44,6 +44,16 @@ export const App: React.StatelessComponent<{}> = () => {
             startWith(state),
         );
 
+        const subscription = store$.subscribe({
+            next: (value) => setState(value)
+        });
+
+        return function cleanup() {
+            subscription.unsubscribe();
+        };
+    }, []);
+
+    useEffect(() => {
         const queryChangeEffect$: Observable<Actions> = action$.pipe(
             ofType<IChangeSearchQueryAction>(ActionType.CHANGE_SEARCH_QUERY),
             filter(({ payload }) => Boolean(payload.searchQuery)),
@@ -97,11 +107,7 @@ export const App: React.StatelessComponent<{}> = () => {
             loadDetailsEfect$
         );
 
-        effects$.subscribe((x) => action$.next(x));
-
-        const subscription = store$.subscribe({
-            next: (value) => setState(value)
-        });
+        const subscription = effects$.subscribe((x) => action$.next(x));
 
         return function cleanup() {
             subscription.unsubscribe();
