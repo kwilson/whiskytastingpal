@@ -1,6 +1,6 @@
 import { ISearchResult } from '../types/search-result';
 import { IDetails } from '../types/details';
-import { ReduxAction, ActionType } from '../actions';
+import { ActionType, Actions } from '../actions';
 
 export interface ReduxState {
     searchQuery: string;
@@ -16,7 +16,7 @@ export const INITIAL_STATE: ReduxState = {
     isLoading: false
 };
 
-export const reducer = (state = INITIAL_STATE, action: ReduxAction): ReduxState => {
+export const reducer = (state = INITIAL_STATE, action: Actions): ReduxState => {
     switch (action.type) {
         case ActionType.CHANGE_SEARCH_QUERY:
             const searchQuery = action.payload.searchQuery;

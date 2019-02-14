@@ -11,12 +11,29 @@ import { SearchResults } from '../search-results';
 import { ISearchResult } from '../../types/search-result';
 import { Loader } from '../loader';
 import { Details } from '../details';
-import { loadSearchResults, loadSearchResultsFulfilled, loadSearchResultsRejected, loadDetails, loadDetailsFulfilled, loadDetailsRejected, changeSearchQuery, hideResult, showResult, clear, ReduxAction, ActionType } from '../../actions';
+import {
+    loadSearchResults,
+    loadSearchResultsFulfilled,
+    loadSearchResultsRejected,
+    loadDetails,
+    loadDetailsFulfilled,
+    loadDetailsRejected,
+    changeSearchQuery,
+    hideResult,
+    showResult,
+    clear,
+    ActionType,
+    IChangeSearchQueryAction,
+    ILoadSearchResultsAction,
+    IShowResultAction,
+    ILoadDetailsAction,
+    Actions
+} from '../../actions';
 import { IDetails } from '../../types/details';
 
 import './app.scss';
 
-const action$ = new Subject<ReduxAction>();
+const action$ = new Subject<Actions>();
 
 export const App: React.StatelessComponent<{}> = () => {
     const [state, setState] = useState(INITIAL_STATE);
@@ -27,14 +44,14 @@ export const App: React.StatelessComponent<{}> = () => {
             startWith(state),
         );
 
-        const queryChangeEffect$: Observable<ReduxAction> = action$.pipe(
-            ofType(ActionType.CHANGE_SEARCH_QUERY),
-            filter(({ payload }) => payload.searchQuery),
-            map(({ payload }) => loadSearchResults(payload.searchQuery))
+        const queryChangeEffect$: Observable<Actions> = action$.pipe(
+            ofType<IChangeSearchQueryAction>(ActionType.CHANGE_SEARCH_QUERY),
+            filter(({ payload }) => Boolean(payload.searchQuery)),
+            map<IChangeSearchQueryAction, ILoadSearchResultsAction>(({ payload }) => loadSearchResults(payload.searchQuery))
         );
 
-        const loadSearchResultsEffect$: Observable<ReduxAction> = action$.pipe(
-            ofType(ActionType.LOAD_SEARCH_RESULTS),
+        const loadSearchResultsEffect$: Observable<Actions> = action$.pipe(
+            ofType<ILoadSearchResultsAction>(ActionType.LOAD_SEARCH_RESULTS),
             map((action) => action.payload.searchQuery),
             switchMap(
                 (searchQuery: string) => ajax.getJSON<ISearchResult[]>(`/api/search?terms=${searchQuery}`).pipe(
@@ -50,13 +67,13 @@ export const App: React.StatelessComponent<{}> = () => {
             )
         );
 
-        const selectResultEffect$: Observable<ReduxAction> = action$.pipe(
-            ofType(ActionType.SHOW_RESULT),
+        const selectResultEffect$: Observable<Actions> = action$.pipe(
+            ofType<IShowResultAction>(ActionType.SHOW_RESULT),
             map(({ payload }) => loadDetails(payload.selectedResult))
         );
 
-        const loadDetailsEfect$: Observable<ReduxAction> = action$.pipe(
-            ofType(ActionType.LOAD_DETAILS),
+        const loadDetailsEfect$: Observable<Actions> = action$.pipe(
+            ofType<ILoadDetailsAction>(ActionType.LOAD_DETAILS),
             map((action) => action.payload.selectedResult.url),
             switchMap(
                 (url: string) => ajax.getJSON<IDetails>(`/api/${url}`).pipe(
@@ -91,7 +108,7 @@ export const App: React.StatelessComponent<{}> = () => {
         };
     }, []);
 
-    const dispatch = (action: ReduxAction) => action$.next(action);
+    const dispatch = (action: Actions) => action$.next(action);
 
     const onChangeValue = (searchQuery: string) =>
         dispatch(changeSearchQuery(searchQuery));
