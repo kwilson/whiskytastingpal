@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useState, useEffect } from 'react';
-import { Subject, Observable, of } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { scan, startWith, map, switchMap, catchError, takeUntil, filter } from 'rxjs/operators';
 import { ajax, AjaxError } from 'rxjs/ajax';
 
