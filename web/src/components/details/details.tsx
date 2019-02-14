@@ -13,12 +13,12 @@ export const Details: React.StatelessComponent<IProps> = ({ details, onClose }) 
         <h1 className="title is-3">{details.title}</h1>
 
         {details.tastingNotes.map((notes) => (
-            <>
-                <h2 className="title is-5" key={notes.title}>{notes.title}</h2>
+            <React.Fragment key={notes.title}>
+                <h2 className="title is-5">{notes.title}</h2>
                 <div className="content">
                     <p>{notes.value}</p>
                 </div>
-            </>
+            </React.Fragment>
         ))}
 
         {details.tastingNotes.length === 0 && (
