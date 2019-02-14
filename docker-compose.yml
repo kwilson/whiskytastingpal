@@ -7,8 +7,6 @@ services:
         - api
     ports:
       - "8000:80"
-    volumes:
-      - ./web/dist:/var/www
   api:
     image: momscraper-api
     build: ./api
