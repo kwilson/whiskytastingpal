@@ -85,7 +85,10 @@ export const App: React.StatelessComponent<{}> = () => {
 
             <section className="section">
                 {state.details && (
-                    <Details details={state.details} onClose={onClose} />
+                    <Details
+                        details={state.details}
+                        onClose={onClose}
+                    />
                 )}
 
                 {!state.details && (

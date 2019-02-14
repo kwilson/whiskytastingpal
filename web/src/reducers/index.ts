@@ -1,11 +1,11 @@
 import { ISearchResult } from '../types/search-result';
-import { IDetails } from '../types/details';
+import { IExtendedDetails } from '../types/details';
 import { ActionType, Actions } from '../actions';
 
 export interface ReduxState {
     searchQuery: string;
     searchResults: ISearchResult[];
-    details: IDetails | null;
+    details: IExtendedDetails | null;
     isLoading: boolean;
 }
 
