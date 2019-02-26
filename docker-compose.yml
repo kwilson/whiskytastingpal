@@ -1,12 +1,21 @@
 version: '3'
 services:
   web:
-    image: momscraper-web
-    build: ./web
+    image: kyma/docker-nginx
     depends_on:
-        - api
-    ports:
-      - "8000:80"
+      - builder
+      - api
+    volumes:
+      - ./web/nginx-config:/etc/nginx/sites-enabled/default:ro
+      - ./web/dist:/var/www
+
   api:
     image: momscraper-api
     build: ./api
+
+  builder:
+    build:
+      context: ./web
+      dockerfile: builder.dockerfile
+    volumes:
+      - ./web/dist:/web/dist

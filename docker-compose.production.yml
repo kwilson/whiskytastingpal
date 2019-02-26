@@ -1,8 +1,14 @@
 version: '3'
 services:
   web:
-    ports:
-      - "80:80"
     restart: always
+    networks:
+      - nginx_shared-network
   api:
     restart: always
+    networks:
+      - nginx_shared-network
+
+networks:
+  nginx_shared-network:
+    external: true
