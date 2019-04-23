@@ -15,7 +15,7 @@ export const Details: React.StatelessComponent<IProps> = ({ details, onClose }) 
 
             {details.tastingNotes.map((notes) => (
                 <React.Fragment key={notes.title}>
-                    <h2 className="title is-5">{notes.title}</h2>
+                    {Boolean(notes.title) && (<h2 className="title is-5">{notes.title}</h2>)}
                     <div className="content Details__notes">
                         <p>{notes.value}</p>
                     </div>

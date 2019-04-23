@@ -29,9 +29,17 @@ def get_whisky_details(id):
     }
 
 def get_tasting_note(tasting_note):
-    title = tasting_note.find("b").text.strip()
-    value = tasting_note.find("b").next_sibling.string.strip()
-    return {
-        "title": title,
-        "value": value
-    }
+    note_node_title = tasting_note.find("b")
+    if note_node_title is None:
+        return {
+            "title": "",
+            "value": tasting_note.text.strip()
+        }
+
+    else:
+        title = note_node_title.text.strip()
+        value = note_node_title.next_sibling.string.strip()
+        return {
+            "title": title,
+            "value": value
+        }
