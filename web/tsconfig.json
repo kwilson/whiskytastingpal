@@ -1,8 +1,10 @@
 {
     "compilerOptions": {
         "jsx": "react",
+        "lib": ["es6", "dom", "es2017"],
         "strict": true,
         "noEmitOnError": true,
-        "noUnusedLocals": true
+        "noUnusedLocals": true,
+        "esModuleInterop": true,
     }
 }

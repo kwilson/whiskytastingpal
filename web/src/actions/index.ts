@@ -1,9 +1,6 @@
 import { ISearchResult } from "../types/search-result";
 import { IExtendedDetails } from "../types/details";
 
-export interface ReduxAction {
-    type: ActionType;
-}
 
 export enum ActionType {
     CHANGE_SEARCH_QUERY = 'CHANGE_SEARCH_QUERY',
@@ -22,130 +19,72 @@ export enum ActionType {
     CLEAR = 'CLEAR'
 }
 
-export interface IChangeSearchQueryAction extends ReduxAction {
-    type: ActionType.CHANGE_SEARCH_QUERY;
-    payload: {
-        searchQuery: string;
-    };
-}
-
-export const changeSearchQuery = (searchQuery: string): IChangeSearchQueryAction => ({
+export const changeSearchQuery = (searchQuery: string) => (<const>{
     type: ActionType.CHANGE_SEARCH_QUERY,
     payload: {
         searchQuery
     }
 });
 
-export interface ILoadSearchResultsAction extends ReduxAction {
-    type: ActionType.LOAD_SEARCH_RESULTS;
-    payload: {
-        searchQuery: string;
-    };
-}
-
-export const loadSearchResults = (searchQuery: string): ILoadSearchResultsAction => ({
+export const loadSearchResults = (searchQuery: string) => (<const>{
     type: ActionType.LOAD_SEARCH_RESULTS,
     payload: {
         searchQuery
     }
 });
 
-export interface ILoadSearchResultsFulfilledAction extends ReduxAction {
-    type: ActionType.LOAD_SEARCH_RESULTS_FULFILLED;
-    payload: {
-        results: ISearchResult[]
-    }
-}
-
-export const loadSearchResultsFulfilled = (results: ISearchResult[]): ILoadSearchResultsFulfilledAction => ({
+export const loadSearchResultsFulfilled = (results: ISearchResult[]) => (<const>{
     type: ActionType.LOAD_SEARCH_RESULTS_FULFILLED,
     payload: {
         results
     }
 });
 
-export interface ILoadSearchResultsRejectedAction extends ReduxAction {
-    type: ActionType.LOAD_SEARCH_RESULTS_REJECTED
-}
-
-export const loadSearchResultsRejected = (results: ISearchResult[]): ILoadSearchResultsRejectedAction => ({
+export const loadSearchResultsRejected = (results: ISearchResult[]) => (<const>{
     type: ActionType.LOAD_SEARCH_RESULTS_REJECTED
 });
 
-export interface ILoadDetailsAction extends ReduxAction {
-    type: ActionType.LOAD_DETAILS;
-    payload: {
-        selectedResult: ISearchResult;
-    };
-}
-
-export const loadDetails = (selectedResult: ISearchResult): ILoadDetailsAction => ({
+export const loadDetails = (selectedResult: ISearchResult) => (<const>{
     type: ActionType.LOAD_DETAILS,
     payload: {
         selectedResult
     }
 });
 
-export interface ILoadDetailsFulfilledAction extends ReduxAction {
-    type: ActionType.LOAD_DETAILS_FULFILLED;
-    payload: {
-        results: IExtendedDetails
-    };
-}
-
-export const loadDetailsFulfilled = (details: IExtendedDetails): ILoadDetailsFulfilledAction => ({
+export const loadDetailsFulfilled = (details: IExtendedDetails) => (<const>{
     type: ActionType.LOAD_DETAILS_FULFILLED,
     payload: {
         results: details
     }
 });
 
-export interface ILoadDetailsRejectedAction extends ReduxAction {
-    type: ActionType.LOAD_DETAILS_REJECTED
-}
-
-export const loadDetailsRejected = (): ILoadDetailsRejectedAction => ({
+export const loadDetailsRejected = () => (<const>{
     type: ActionType.LOAD_DETAILS_REJECTED
 });
 
-export interface IShowResultAction extends ReduxAction {
-    type: ActionType.SHOW_RESULT;
-    payload: {
-        selectedResult: ISearchResult;
-    };
-}
-
-export const showResult = (selectedResult: ISearchResult): IShowResultAction => ({
+export const showResult = (selectedResult: ISearchResult) => (<const>{
     type: ActionType.SHOW_RESULT,
     payload: {
         selectedResult
     }
 });
 
-export interface IHideResultAction extends ReduxAction {
-    type: ActionType.HIDE_RESULT
-}
-
-export const hideResult = (): IHideResultAction => ({
+export const hideResult = () => (<const>{
     type: ActionType.HIDE_RESULT
 });
 
-export interface IClearAction extends ReduxAction {
-    type: ActionType.CLEAR
-}
-
-export const clear = (): IClearAction => ({
+export const clear = () => (<const>{
     type: ActionType.CLEAR
 });
 
 export type Actions =
-| IChangeSearchQueryAction
-| ILoadDetailsAction
-| ILoadDetailsFulfilledAction
-| ILoadDetailsRejectedAction
-| ILoadSearchResultsAction
-| ILoadSearchResultsFulfilledAction
-| ILoadSearchResultsRejectedAction
-| IShowResultAction
-| IHideResultAction
-| IClearAction
+| ReturnType<typeof changeSearchQuery>
+| ReturnType<typeof loadSearchResults>
+| ReturnType<typeof loadSearchResultsFulfilled>
+| ReturnType<typeof loadSearchResultsRejected>
+| ReturnType<typeof loadDetails>
+| ReturnType<typeof loadDetailsFulfilled>
+| ReturnType<typeof loadDetailsRejected>
+| ReturnType<typeof showResult>
+| ReturnType<typeof hideResult>
+| ReturnType<typeof clear>;
