@@ -1,23 +1,23 @@
+import keymirror from 'keymirror';
 import { ISearchResult } from "../types/search-result";
 import { IExtendedDetails } from "../types/details";
 
+export const ActionType = keymirror({
+    CHANGE_SEARCH_QUERY: null,
 
-export enum ActionType {
-    CHANGE_SEARCH_QUERY = 'CHANGE_SEARCH_QUERY',
+    LOAD_SEARCH_RESULTS: null,
+    LOAD_SEARCH_RESULTS_FULFILLED: null,
+    LOAD_SEARCH_RESULTS_REJECTED: null,
 
-    LOAD_SEARCH_RESULTS = 'LOAD_SEARCH_RESULTS',
-    LOAD_SEARCH_RESULTS_FULFILLED = 'LOAD_SEARCH_RESULTS_FULFILLED',
-    LOAD_SEARCH_RESULTS_REJECTED = 'LOAD_SEARCH_RESULTS_REJECTED',
+    LOAD_DETAILS: null,
+    LOAD_DETAILS_FULFILLED: null,
+    LOAD_DETAILS_REJECTED: null,
 
-    LOAD_DETAILS = 'LOAD_DETAILS',
-    LOAD_DETAILS_FULFILLED = 'LOAD_DETAILS_FULFILLED',
-    LOAD_DETAILS_REJECTED = 'LOAD_DETAILS_REJECTED',
+    SHOW_RESULT: null,
+    HIDE_RESULT: null,
 
-    SHOW_RESULT = 'SHOW_RESULT',
-    HIDE_RESULT = 'HIDE_RESULT',
-
-    CLEAR = 'CLEAR'
-}
+    CLEAR: null,
+});
 
 export const changeSearchQuery = (searchQuery: string) => (<const>{
     type: ActionType.CHANGE_SEARCH_QUERY,
