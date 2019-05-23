@@ -9,6 +9,6 @@ services:
   builder:
     command: npm run dev
     ports:
-     - "8000:8080"
+     - "8080:8080"
     volumes:
-      - ./web/src:/web/src
+      - ./web/src:/web/src:rw

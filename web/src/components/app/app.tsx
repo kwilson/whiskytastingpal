@@ -78,7 +78,7 @@ export const App: React.StatelessComponent<{}> = () => {
                         <h1 className="title">Whisky Tasting Pal</h1>
                         <h2 className="subtitle">
                             Because nobody should have to drink alone.
-                    </h2>
+                        </h2>
                     </div>
                 </div>
             </section>

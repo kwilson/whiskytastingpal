@@ -88,6 +88,7 @@ module.exports = {
         }
     },
     watchOptions: {
-        aggregateTimeout: 1000
+        aggregateTimeout: 300,
+        poll: 1000
     }
 };
