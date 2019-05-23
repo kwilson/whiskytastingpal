@@ -2,8 +2,8 @@
 from fastapi import FastAPI
 from starlette.requests import Request
 
-import mom_search
-from mom_details import get_whisky_details
+from wtp_search import search
+from wtp_details import get_whisky_details
 
 # set up api
 app = FastAPI()
@@ -14,5 +14,5 @@ def get_whisky(request: Request):
     return get_whisky_details(vals["slug"])
 
 @app.get("/search")
-def search(terms):
-    return mom_search.search(terms)
+def search_whisky(terms):
+    return search(terms)

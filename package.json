@@ -1,5 +1,5 @@
 {
-  "name": "momscraper",
+  "name": "whisky-tasting-pal",
   "version": "1.0.0",
   "description": "Web scraper for Master of Malt tasting notes.",
   "main": "index.js",

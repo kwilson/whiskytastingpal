@@ -10,7 +10,7 @@ services:
       - ./web/dist:/var/www
 
   api:
-    image: momscraper-api
+    image: scraper-api
     build: ./api
 
   builder:
