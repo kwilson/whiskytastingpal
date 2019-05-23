@@ -80,6 +80,12 @@ module.exports = {
     devServer: {
         host: '0.0.0.0',
         port: 8080,
+        proxy: {
+            '/api': {
+                target: 'http://api',
+                pathRewrite: { '^/api': '' }
+            }
+        }
     },
     watchOptions: {
         aggregateTimeout: 1000
