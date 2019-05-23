@@ -42,7 +42,7 @@ export const App: React.StatelessComponent<{}> = () => {
     }, []);
 
     useEffect(() => {
-        const effects$ = combineEffects(
+        const effects$ = combineEffects<Actions>(
             queryChangeEffect$(action$),
             loadSearchResultsEffect$(action$),
             selectResultEffect$(action$),
