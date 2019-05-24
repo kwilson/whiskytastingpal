@@ -2,6 +2,8 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CopyPlugin = require('copy-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
     entry: './src/index.tsx',
@@ -67,6 +69,9 @@ module.exports = {
             title: 'Whisky Tasting Pal',
             template: './src/index.html',
         }),
+        new CopyPlugin([
+            { from: './static', to: './' },
+        ]),
         new webpack.WatchIgnorePlugin([
             /css\.d\.ts$/
         ]),
@@ -75,7 +80,8 @@ module.exports = {
             // both options are optional
             filename: "[name].css",
             chunkFilename: "[id].css"
-        })
+        }),
+        new CleanWebpackPlugin(),
     ],
     devServer: {
         host: '0.0.0.0',
