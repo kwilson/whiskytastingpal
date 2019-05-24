@@ -1,16 +1,7 @@
 version: '3'
 services:
-  web:
-    image: kyma/docker-nginx
-    depends_on:
-      - builder
-      - api
-    volumes:
-      - ./web/nginx-config:/etc/nginx/sites-enabled/default:ro
-      - ./web/dist:/var/www
-
   api:
-    image: momscraper-api
+    image: scraper-api
     build: ./api
 
   builder:

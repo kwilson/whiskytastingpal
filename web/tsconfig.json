@@ -1,8 +1,18 @@
 {
     "compilerOptions": {
+        "lib": [
+            "dom",
+            "dom.iterable",
+            "esnext"
+        ],
+        "esModuleInterop": true,
         "jsx": "react",
-        "strict": true,
+        "module": "commonjs",
         "noEmitOnError": true,
-        "noUnusedLocals": true
+        "noUnusedLocals": true,
+        "outDir": "./dist/",
+        "sourceMap": true,
+        "strict": true,
+        "target": "es5",
     }
 }
