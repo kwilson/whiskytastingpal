@@ -2,6 +2,7 @@ import * as React from 'react';
 import { IExtendedDetails } from '../../types/details';
 
 import styles from './details.module.scss';
+import { Button } from '../button';
 
 export interface IProps {
     details: IExtendedDetails;
@@ -36,6 +37,6 @@ export const Details: React.StatelessComponent<IProps> = ({ details, onClose }) 
 
         <hr className={styles.divider} />
 
-        <button className={styles.closeButton} onClick={onClose}>Close</button>
+        <Button primary onClick={onClose}>Close</Button>
     </article>
 );

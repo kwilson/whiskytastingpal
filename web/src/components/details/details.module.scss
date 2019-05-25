@@ -1,6 +1,5 @@
 @import "../common";
 
-@import "~bulma/sass/elements/button.sass";
 @import "~bulma/sass/elements/content.sass";
 @import "~bulma/sass/elements/title.sass";
 
@@ -40,9 +39,4 @@
 
 .divider {
     width: 80%;
-}
-
-.closeButton {
-    @extend .button;
-    @extend .is-primary;
 }

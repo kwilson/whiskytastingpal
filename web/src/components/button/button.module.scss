@@ -1,0 +1,15 @@
+@import "../common";
+
+@import "~bulma/sass/elements/button.sass";
+
+.primary {
+    @extend .is-primary;
+}
+
+.info {
+    @extend .is-info;
+}
+
+.large {
+    @extend .is-large;
+}

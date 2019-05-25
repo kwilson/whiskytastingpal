@@ -2,6 +2,7 @@ import * as React from 'react';
 import { ISearchResult } from '../../types/search-result';
 
 import styles from './search-results.module.scss';
+import { Button } from '../button';
 
 interface IProps {
     searchResults: ISearchResult[];
@@ -58,10 +59,9 @@ export const SearchResults: React.StatelessComponent<IProps> = (props) => {
 
             <hr />
 
-            <button
-                className={styles.button}
-                onClick={props.onCancel}
-            >Clear</button>
+            <Button onClick={props.onCancel}>
+                Clear
+            </Button>
         </div>
     );
 };

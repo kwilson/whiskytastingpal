@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useState } from 'react';
 
 import styles from './search-form.module.scss';
+import { Button } from '../button';
 
 interface IProps {
     defaultSearchQuery: string;
@@ -33,9 +34,9 @@ export const SearchForm: React.StatelessComponent<IProps> = ({ defaultSearchQuer
                     />
                 </div>
                 <div className={styles.control}>
-                    <button className={styles.button}>
+                    <Button info large className={styles.button}>
                         Search
-                    </button>
+                    </Button>
                 </div>
             </div>
         </form>
