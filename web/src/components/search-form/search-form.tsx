@@ -22,7 +22,7 @@ export const SearchForm: React.StatelessComponent<IProps> = ({ defaultSearchQuer
     }
 
     return (
-        <form className={styles.container} onSubmit={onSubmit}>
+        <form className="container" onSubmit={onSubmit}>
             <div className={styles.field}>
                 <div className={styles.expandedControl}>
                     <input

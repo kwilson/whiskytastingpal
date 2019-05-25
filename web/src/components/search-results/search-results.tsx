@@ -54,7 +54,7 @@ const getSearchResult = (
 
 export const SearchResults: React.StatelessComponent<IProps> = (props) => {
     return (
-        <div className={styles.container}>
+        <div className="container">
             {props.searchResults.map((x) => getSearchResult(x, props.onSelect))}
 
             <hr />

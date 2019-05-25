@@ -81,7 +81,7 @@ export const App: React.StatelessComponent<{}> = () => {
 
             <section className={heroCss}>
                 <div className={styles["hero-body"]}>
-                    <div className={styles.container}>
+                    <div className="container">
                         <h1 className={styles.title}>Whisky Tasting Pal</h1>
                         <h2 className={styles.subtitle}>
                             Because nobody should have to drink alone.

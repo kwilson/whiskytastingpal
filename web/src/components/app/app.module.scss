@@ -4,3 +4,7 @@
 @import "~bulma/sass/elements/title.sass";
 @import "~bulma/sass/layout/hero.sass";
 @import "~bulma/sass/layout/section.sass";
+
+:global(.container) {
+    @extend .container;
+}
