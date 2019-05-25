@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import './loader.scss';
+import styles from './loader.module.scss';
 
 export interface IProps {
     loading: boolean;
@@ -9,8 +9,8 @@ export interface IProps {
 export const Loader: React.StatelessComponent<IProps> = ({ loading }) =>
     loading
         ? (
-            <div className="Loader is-loading">
-                <span className="Loader__text">Loading…</span>
+            <div className={styles.loader}>
+                <span className={styles.text}>Loading…</span>
             </div>
         )
         : null;

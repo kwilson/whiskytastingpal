@@ -1,0 +1,23 @@
+@import "../common";
+
+@import "~bulma/sass/elements/button.sass";
+@import "~bulma/sass/elements/container.sass";
+@import "~bulma/sass/form/_all.sass";
+
+.field {
+    @extend .has-addons;
+}
+
+.expandedControl {
+    @extend .control;
+    @extend .is-expanded;
+}
+
+.input {
+    @extend .is-large;
+}
+
+.button {
+    @extend .is-info;
+    @extend .is-large;
+}

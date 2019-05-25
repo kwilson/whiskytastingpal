@@ -2,6 +2,7 @@ import * as React from 'react'
 import { useState, useEffect } from 'react';
 import { Subject } from 'rxjs';
 import { scan, startWith } from 'rxjs/operators';
+import classnames from 'classnames';
 
 import { reducer, INITIAL_STATE } from '../../reducers';
 import { SearchForm } from '../search-form';
@@ -18,7 +19,8 @@ import {
     Actions
 } from '../../actions';
 
-import './app.scss';
+import styles from './app.module.scss';
+
 import { queryChangeEffect$, loadSearchResultsEffect$, selectResultEffect$, loadDetailsEfect$ } from '../../effects';
 
 const action$ = new Subject<Actions>();
@@ -68,22 +70,27 @@ export const App: React.StatelessComponent<{}> = () => {
 
     const onClose = () => dispatch(hideResult());
 
+    const heroCss = classnames(
+        styles.hero,
+        styles['is-primary'],
+    );
+
     return (
         <>
             <Loader loading={state.isLoading} />
 
-            <section className="hero is-primary">
-                <div className="hero-body">
-                    <div className="container">
-                        <h1 className="title">Whisky Tasting Pal</h1>
-                        <h2 className="subtitle">
+            <section className={heroCss}>
+                <div className={styles["hero-body"]}>
+                    <div className={styles.container}>
+                        <h1 className={styles.title}>Whisky Tasting Pal</h1>
+                        <h2 className={styles.subtitle}>
                             Because nobody should have to drink alone.
                         </h2>
                     </div>
                 </div>
             </section>
 
-            <section className="section">
+            <section className={styles.section}>
                 {state.details && (
                     <Details
                         details={state.details}
@@ -100,7 +107,7 @@ export const App: React.StatelessComponent<{}> = () => {
             </section>
 
             {!state.details && state.searchResults.length > 0 && (
-                <section className="section">
+                <section className={styles.section}>
                     <SearchResults
                         searchResults={state.searchResults}
                         onCancel={() => onClear()}

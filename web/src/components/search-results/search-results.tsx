@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ISearchResult } from '../../types/search-result';
 
-import './search-results.scss';
+import styles from './search-results.module.scss';
 
 interface IProps {
     searchResults: ISearchResult[];
@@ -11,8 +11,8 @@ interface IProps {
 
 const getMeta = (label: string, value: string) => (
     <React.Fragment key={label}>
-        <dt className="search-result__meta-label">{label}</dt>
-        <dt className="search-result__meta-value">{value}</dt>
+        <dt className={styles.metaLabel}>{label}</dt>
+        <dt className={styles.metaValue}>{value}</dt>
     </React.Fragment>
 )
 
@@ -30,20 +30,19 @@ const getSearchResult = (
     const onClick = () => onSelect(searchResult);
 
     return (
-        <div className="box search-result" onClick={onClick} key={searchResult.url}>
-            <article className="media search-result">
-                <div className="search-result__image">
-                    <figure className="image">
+        <div className={styles.searchResult} onClick={onClick} key={searchResult.url}>
+            <article className={styles.media}>
+                <div className={styles.imageWrapper}>
+                    <figure className={styles.image}>
                         <img
-                            className="bottle__image"
                             src={getImageUrl(searchResult.productimage)}
                             alt=""
                         />
                     </figure>
                 </div>
-                <div className="search-result__content">
-                    <h2 className="title is-4">{searchResult.title}</h2>
-                        <dl className="search-result__meta">
+                <div>
+                    <h2 className={styles.title}>{searchResult.title}</h2>
+                        <dl className={styles.meta}>
                             {meta}
                         </dl>
                 </div>
@@ -54,13 +53,13 @@ const getSearchResult = (
 
 export const SearchResults: React.StatelessComponent<IProps> = (props) => {
     return (
-        <div className="container SearchResults">
+        <div className={styles.container}>
             {props.searchResults.map((x) => getSearchResult(x, props.onSelect))}
 
             <hr />
 
             <button
-                className="button"
+                className={styles.button}
                 onClick={props.onCancel}
             >Clear</button>
         </div>

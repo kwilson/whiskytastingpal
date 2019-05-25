@@ -1,4 +1,9 @@
-.Loader {
+@import "../common";
+
+@import "~bulma/sass/form/_all.sass";
+
+.loader {
+    @extend .is-loading;
     align-items: center;
     background: rgba(white, .9);
     bottom: 0;
@@ -9,9 +14,9 @@
     right: 0;
     top: 0;
     z-index: 5;
+}
 
-    &__text {
-        font-size: 1.6rem;
-        font-weight: bold;
-    }
+.text {
+    font-size: 1.6rem;
+    font-weight: bold;
 }

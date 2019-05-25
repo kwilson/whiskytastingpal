@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { useState } from 'react';
 
+import styles from './search-form.module.scss';
+
 interface IProps {
     defaultSearchQuery: string;
     onChangeValue: (searchQuery: string) => void;
@@ -19,19 +21,19 @@ export const SearchForm: React.StatelessComponent<IProps> = ({ defaultSearchQuer
     }
 
     return (
-        <form className="container" onSubmit={onSubmit}>
-            <div className="field has-addons">
-                <div className="control is-expanded">
+        <form className={styles.container} onSubmit={onSubmit}>
+            <div className={styles.field}>
+                <div className={styles.expandedControl}>
                     <input
-                        className="input is-large"
+                        className={styles.input}
                         type="text"
                         placeholder="Search for a whisky"
                         value={searchQuery}
                         onChange={onChangeSearchQuery}
                     />
                 </div>
-                <div className="control">
-                    <button className="button is-info is-large">
+                <div className={styles.control}>
+                    <button className={styles.button}>
                         Search
                     </button>
                 </div>

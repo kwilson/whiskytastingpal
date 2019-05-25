@@ -1,0 +1,48 @@
+@import "../common";
+
+@import "~bulma/sass/elements/button.sass";
+@import "~bulma/sass/elements/content.sass";
+@import "~bulma/sass/elements/title.sass";
+
+.details {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    @extend .is-3;
+}
+
+.noteTitle {
+    @extend .title;
+    @extend .is-5;
+}
+
+.whisky {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    max-width: 420px;
+    position: relative;
+    text-align: center;
+}
+
+.image {
+    height: 100%;
+    opacity: 0.1;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    width: auto;
+    z-index: -1;
+}
+
+.divider {
+    width: 80%;
+}
+
+.closeButton {
+    @extend .button;
+    @extend .is-primary;
+}

@@ -17,6 +17,23 @@ module.exports = {
                 exclude: /node_modules/
             },
             {
+                test: /^((?!\.module).)+\.scss$/,
+                use: [
+                    {
+                        loader: MiniCssExtractPlugin.loader
+                    },
+                    {
+                        loader: 'css-loader'
+                    },
+                    {
+                        loader: "sass-loader",
+                        options: {
+                            implementation: require("sass")
+                        }
+                    }
+                ]
+            },
+            {
                 test: /\.module.scss$/,
                 use: [
                     {
@@ -37,23 +54,6 @@ module.exports = {
                     }
                 ]
             },
-            {
-                test: /\.scss$/,
-                use: [
-                    {
-                        loader: MiniCssExtractPlugin.loader
-                    },
-                    {
-                        loader: 'css-loader'
-                    },
-                    {
-                        loader: "sass-loader",
-                        options: {
-                            implementation: require("sass")
-                        }
-                    }
-                ]
-            }
         ]
     },
     resolve: {
