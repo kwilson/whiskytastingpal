@@ -72,16 +72,15 @@ export const App: React.StatelessComponent<{}> = () => {
         <>
             <Loader loading={state.isLoading} />
 
-            <section className="hero is-primary">
-                <div className="hero-body">
-                    <div className="container">
-                        <h1 className="title">Whisky Tasting Pal</h1>
-                        <h2 className="subtitle">
-                            Because nobody should have to drink alone.
-                        </h2>
+            <nav className="navbar is-primary is-fixed-top" role="navigation" aria-label="main navigation">
+                <div className="container">
+                    <div className="navbar-brand">
+                        <h1 className="navbar-item App__title">
+                            Whisky Tasting Pal
+                        </h1>
                     </div>
                 </div>
-            </section>
+            </nav>
 
             <section className="section">
                 {state.details && (
