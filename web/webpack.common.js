@@ -4,6 +4,7 @@ const webpack = require('webpack');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyPlugin = require('copy-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 
 const devMode = process.env.NODE_ENV !== 'production';
 
@@ -73,6 +74,7 @@ module.exports = {
         new CopyPlugin([
             { from: './static', to: './' },
         ]),
+        new FaviconsWebpackPlugin('./static/icons/1024x1024.png'),
         new webpack.WatchIgnorePlugin([
             /css\.d\.ts$/
         ]),
