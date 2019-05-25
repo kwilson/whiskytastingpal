@@ -10,7 +10,7 @@
     "description": "Finding tasting notes for your favourite drams.",
     "orientation": "portrait",
     "background_color": "#505465",
-    "prefer_related_applications": "false",
+    "prefer_related_applications": false,
     "generated": "true",
     "icons": [
         {
