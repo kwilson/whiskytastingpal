@@ -2,10 +2,13 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CopyPlugin = require('copy-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+
+const devMode = process.env.NODE_ENV !== 'production';
 
 module.exports = {
     entry: './src/index.tsx',
-    devtool: 'inline-source-map',
     module: {
         rules: [
             {
@@ -67,28 +70,18 @@ module.exports = {
             title: 'Whisky Tasting Pal',
             template: './src/index.html',
         }),
+        new CopyPlugin([
+            { from: './static', to: './' },
+        ]),
         new webpack.WatchIgnorePlugin([
             /css\.d\.ts$/
         ]),
         new MiniCssExtractPlugin({
             // Options similar to the same options in webpackOptions.output
             // both options are optional
-            filename: "[name].css",
-            chunkFilename: "[id].css"
-        })
-    ],
-    devServer: {
-        host: '0.0.0.0',
-        port: 8080,
-        proxy: {
-            '/api': {
-                target: 'http://api',
-                pathRewrite: { '^/api': '' }
-            }
-        }
-    },
-    watchOptions: {
-        aggregateTimeout: 300,
-        poll: 1000
-    }
+            filename: devMode ? '[name].css' : '[name].[hash].css',
+            chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
+        }),
+        new CleanWebpackPlugin(),
+    ]
 };

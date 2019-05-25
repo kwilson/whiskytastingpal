@@ -1,0 +1,93 @@
+{
+    "dir": "ltr",
+    "lang": "English",
+    "name": "Whisky Tasting Pal",
+    "scope": "/",
+    "display": "standalone",
+    "start_url": "https://whisky.partcoffee.com/",
+    "short_name": "WTP",
+    "theme_color": "#505465",
+    "description": "Finding tasting notes for your favourite drams.",
+    "orientation": "portrait",
+    "background_color": "#505465",
+    "prefer_related_applications": false,
+    "generated": "true",
+    "icons": [
+        {
+            "src": "/icons/44x44.png",
+            "sizes": "44x44"
+        },
+        {
+            "src": "/icons/48x48.png",
+            "sizes": "48x48"
+        },
+        {
+            "src": "/icons/1240x600.png",
+            "sizes": "1240x600"
+        },
+        {
+            "src": "/icons/300x300.png",
+            "sizes": "300x300"
+        },
+        {
+            "src": "/icons/150x150.png",
+            "sizes": "150x150"
+        },
+        {
+            "src": "/icons/88x88.png",
+            "sizes": "88x88"
+        },
+        {
+            "src": "/icons/24x24.png",
+            "sizes": "24x24"
+        },
+        {
+            "src": "/icons/50x50.png",
+            "sizes": "50x50"
+        },
+        {
+            "src": "/icons/620x300.png",
+            "sizes": "620x300"
+        },
+        {
+            "src": "/icons/192x192.png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "/icons/144x144.png",
+            "sizes": "144x144"
+        },
+        {
+            "src": "/icons/96x96.png",
+            "sizes": "96x96"
+        },
+        {
+            "src": "/icons/72x72.png",
+            "sizes": "72x72"
+        },
+        {
+            "src": "/icons/36x36.png",
+            "sizes": "36x36"
+        },
+        {
+            "src": "/icons/1024x1024.png",
+            "sizes": "1024x1024"
+        },
+        {
+            "src": "/icons/180x180.png",
+            "sizes": "180x180"
+        },
+        {
+            "src": "/icons/152x152.png",
+            "sizes": "152x152"
+        },
+        {
+            "src": "/icons/120x120.png",
+            "sizes": "120x120"
+        },
+        {
+            "src": "/icons/76x76.png",
+            "sizes": "76x76"
+        }
+    ]
+}
