@@ -4,9 +4,14 @@ const webpack = require('webpack');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyPlugin = require('copy-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+const WebpackPwaManifest = require('webpack-pwa-manifest');
 
 const devMode = process.env.NODE_ENV !== 'production';
+const icon = path.resolve('./src/icon.png');
+const themeColor = '#505465';
+const siteTitle = 'Whisky Tasting Pal';
+const siteDescription = 'Finding tasting notes for your favourite drams.';
 
 module.exports = {
     entry: './src/index.tsx',
@@ -68,13 +73,34 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             hash: true,
-            title: 'Whisky Tasting Pal',
+            title: siteTitle,
+            description: siteDescription,
             template: './src/index.html',
         }),
         new CopyPlugin([
             { from: './static', to: './' },
         ]),
-        new FaviconsWebpackPlugin('./static/icons/1024x1024.png'),
+        new FaviconsWebpackPlugin(icon),
+        new WebpackPwaManifest({
+            dir: "ltr",
+            lang: "English",
+            name: siteTitle,
+            scope: "/",
+            display: "standalone",
+            start_url: "https://whisky.partcoffee.com/",
+            short_name: "WTP",
+            theme_color: themeColor,
+            description: siteDescription,
+            orientation: "portrait",
+            background_color: themeColor,
+            prefer_related_applications: false,
+            icons: [
+              {
+                src: icon,
+                sizes: [24, 36, 44, 48, 96, 128, 192, 256, 384, 512] // multiple sizes
+              }
+            ]
+        }),
         new webpack.WatchIgnorePlugin([
             /css\.d\.ts$/
         ]),
