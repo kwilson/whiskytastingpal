@@ -9,7 +9,7 @@ const siteTitle = 'Whisky Tasting Pal';
 const siteDescription = 'Finding tasting notes for your favourite drams.';
 
 module.exports = {
-    entry: './src/index.js',
+    entry: './src/index.jsx',
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'dist'),
