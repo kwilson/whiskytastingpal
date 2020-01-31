@@ -1,8 +1,12 @@
 import * as React from 'react';
 
-export const Search = ({ onSubmit }) => {
+interface IProps {
+    onSubmit: (terms: string) => void;
+}
+
+export const Search: React.StatelessComponent<IProps> = ({ onSubmit }) => {
     const [terms, updateTerms] = React.useState('');
-    const handleSubmit = (e) => {
+    const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
         e.preventDefault();
         onSubmit(terms);
     }

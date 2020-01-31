@@ -9,7 +9,7 @@ const siteTitle = 'Whisky Tasting Pal';
 const siteDescription = 'Finding tasting notes for your favourite drams.';
 
 module.exports = {
-    entry: './src/index.jsx',
+    entry: './src',
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'dist'),
@@ -18,7 +18,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.(js|jsx)$/,
+                test: /\.(js|jsx|ts|tsx)$/,
                 exclude: /node_modules/,
                 loader: "babel-loader"
             },
@@ -37,7 +37,7 @@ module.exports = {
         ],
     },
     resolve: {
-        extensions: ['.js', '.jsx']
+        extensions: ['.js', '.jsx', '.ts', '.tsx']
     },
     plugins: [
         new HtmlWebpackPlugin({
