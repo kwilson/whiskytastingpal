@@ -3,7 +3,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
-const devMode = process.env.NODE_ENV !== 'production';
 const themeColor = '#505465';
 const siteTitle = 'Whisky Tasting Pal';
 const siteDescription = 'Finding tasting notes for your favourite drams.';
