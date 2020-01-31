@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const themeColor = '#505465';
 const siteTitle = 'Whisky Tasting Pal';
@@ -16,7 +17,23 @@ module.exports = {
     },
     module: {
         rules: [
-            { test: /\.(js|jsx)$/, exclude: /node_modules/, loader: "babel-loader" }
+            {
+                test: /\.(js|jsx)$/,
+                exclude: /node_modules/,
+                loader: "babel-loader"
+            },
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader']
+            },
+            {
+                test: /\.(png|gif|jpe|jpg|woff|woff2|eot|ttf|svg)(\?.*$|$)/,
+                use: [
+                    {
+                        loader: 'file-loader'
+                    }
+                ]
+            }
         ],
     },
     resolve: {
