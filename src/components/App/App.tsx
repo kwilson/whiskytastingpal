@@ -4,9 +4,11 @@ import axios from 'axios';
 import { Loader } from '../Loader';
 import { Search } from '../Search';
 
+import { reducer, INITIAL_STATE } from './reducer';
+import { search, searchComplete } from './actions';
 import './App.scss';
 
-interface ISearchResult {
+export interface ISearchResult {
     title: string,
     url: string,
     image: string,
@@ -15,21 +17,17 @@ interface ISearchResult {
 }
 
 export const App = () => {
-    const [results, updateResults] = React.useState<ISearchResult[]>([]);
-    const [isLoading, setIsLoading] = React.useState(false);
+    const [state, dispatch] = React.useReducer(reducer, INITIAL_STATE)
 
     const handleSearch = (terms: string) => {
-        setIsLoading(true);
+        dispatch(search(terms));
         axios.get<ISearchResult[]>(`/.netlify/functions/search?terms=${terms}`)
-            .then(results => {
-                updateResults(results.data);
-                setIsLoading(false);
-            });
+            .then(results => dispatch(searchComplete(results.data)));
     }
 
     return (
         <>
-            <Loader loading={isLoading} />
+            <Loader loading={state.isLoading} />
 
             <nav className="navbar is-primary is-fixed-top" role="navigation" aria-label="main navigation">
                 <div className="container">
@@ -48,7 +46,7 @@ export const App = () => {
             <hr />
 
             <pre>
-                {JSON.stringify(results, null, 2)}
+                {JSON.stringify(state.results, null, 2)}
             </pre>
         </>
     )
