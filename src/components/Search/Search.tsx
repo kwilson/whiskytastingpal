@@ -12,9 +12,23 @@ export const Search: React.StatelessComponent<IProps> = ({ onSubmit }) => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input value={terms} onChange={e => updateTerms(e.target.value)} />
-            <button type="submit">Search</button>
+        <form className="container" onSubmit={handleSubmit}>
+            <div className="field has-addons">
+                <div className="control is-expanded">
+                    <input
+                        className="input is-large"
+                        type="text"
+                        placeholder="Search for a whisky"
+                        value={terms}
+                        onChange={e => updateTerms(e.target.value)}
+                    />
+                </div>
+                <div className="control">
+                    <button className="button is-info is-large">
+                        Search
+                    </button>
+                </div>
+            </div>
         </form>
     );
 };
