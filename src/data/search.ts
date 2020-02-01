@@ -11,4 +11,3 @@ export interface ISearchResult {
 export const search = (terms: string) => axios
     .get<ISearchResult[]>(`/.netlify/functions/search?terms=${terms}`)
     .then(results => results.data);
-

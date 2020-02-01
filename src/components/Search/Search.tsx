@@ -16,7 +16,7 @@ export const Search: React.StatelessComponent<IProps> = ({ onSubmit }) => {
             <div className="field has-addons">
                 <div className="control is-expanded">
                     <input
-                        className="input is-large"
+                        className="input"
                         type="text"
                         placeholder="Search for a whisky"
                         value={terms}
@@ -24,7 +24,7 @@ export const Search: React.StatelessComponent<IProps> = ({ onSubmit }) => {
                     />
                 </div>
                 <div className="control">
-                    <button className="button is-info is-large">
+                    <button className="button is-info">
                         Search
                     </button>
                 </div>

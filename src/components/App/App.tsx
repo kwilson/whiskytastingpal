@@ -4,22 +4,28 @@ import { Loader } from '../Loader';
 import { Search } from '../Search';
 
 import { reducer, INITIAL_STATE } from './reducer';
-import { search, searchComplete } from './actions';
+import { search, searchComplete, clearSearch } from './actions';
 import './App.scss';
-import { getHasSearchResults, getSearchResults } from './selectors';
+import { getHasSearchResults, getSearchResults, getTerms } from './selectors';
 import { SearchResults } from '../SearchResults';
 import { search as searchByTerms } from '../../data';
 
 export const App = () => {
     const [state, dispatch] = React.useReducer(reducer, INITIAL_STATE);
+
+    const terms = getTerms(state);
     const hasSearchResults = getHasSearchResults(state);
     const searchResults = getSearchResults(state);
 
-    const handleSearch = (terms: string) => {
-        dispatch(search(terms));
-        searchByTerms(terms)
-            .then(results => dispatch(searchComplete(results)));
-    }
+    React.useEffect(() => {
+        if (terms) {
+            searchByTerms(terms)
+                .then(results => dispatch(searchComplete(results)));
+        }
+    }, [terms]);
+
+    const handleSearch = (terms: string) => dispatch(search(terms));
+    const onCancel = () => dispatch(clearSearch());
 
     return (
         <>
@@ -40,7 +46,10 @@ export const App = () => {
             </section>
 
             {hasSearchResults && (
-                <SearchResults results={searchResults} />
+                <SearchResults
+                    results={searchResults}
+                    onCancel={onCancel}
+                />
             )}
         </>
     )
