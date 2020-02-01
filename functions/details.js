@@ -28,13 +28,41 @@ const getNote = (note) => {
     };
 };
 
+/**
+ * @param {Cheerio} ratingNode
+ */
+const getRating = (ratingNode) => {
+    if (ratingNode) {
+        const content = ratingNode.attr('content');
+        if (content) {
+            return content.trim();
+        }
+    }
+
+    return null;
+}
+
+/**
+ * @param {Cheerio} descriptionNode
+ */
+const getDescription = (descriptionNode) => {
+    if (descriptionNode) {
+        const content = descriptionNode.text();
+        if (content) {
+            return content.trim();
+        }
+    }
+
+    return null;
+}
+
 const parse = html => {
     const $ = load(html);
     const title = $('h1').text().trim();
     const notes = $('p[id$="TastingNote"]');
     const img = $('img[id$="imgProductBig"]').attr('src');
-    const description = $('[itemprop="description"]').text().trim();
-    const rating = $('[itemprop="ratingValue"]').attr('content').trim();
+    const description = getDescription($('[itemprop="description"]'));
+    const rating = getRating($('[itemprop="ratingValue"]'));
 
     return {
         title,
