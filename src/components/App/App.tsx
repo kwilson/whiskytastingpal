@@ -1,4 +1,9 @@
 import * as React from 'react';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route
+} from "react-router-dom";
 
 import { Loader } from '../Loader';
 import { Search } from '../Search';
@@ -9,6 +14,7 @@ import './App.scss';
 import { getHasSearchResults, getSearchResults, getTerms } from './selectors';
 import { SearchResults } from '../SearchResults';
 import { search as searchByTerms } from '../../data';
+import { WhiskyDetails } from '../WhiskyDetails';
 
 export const App = () => {
     const [state, dispatch] = React.useReducer(reducer, INITIAL_STATE);
@@ -28,7 +34,7 @@ export const App = () => {
     const onCancel = () => dispatch(clearSearch());
 
     return (
-        <>
+        <Router>
             <Loader loading={state.isLoading} />
 
             <nav className="navbar is-primary is-fixed-top" role="navigation" aria-label="main navigation">
@@ -41,16 +47,22 @@ export const App = () => {
                 </div>
             </nav>
 
-            <section className="section">
-                <Search onSubmit={handleSearch} />
-            </section>
-
-            {hasSearchResults && (
-                <SearchResults
-                    results={searchResults}
-                    onCancel={onCancel}
-                />
-            )}
-        </>
+            <Switch>
+                <Route path="/:id/*">
+                    <WhiskyDetails />
+                </Route>
+                <Route path="/">
+                    <section className="section">
+                        <Search onSubmit={handleSearch} />
+                    </section>
+                    {hasSearchResults && (
+                        <SearchResults
+                            results={searchResults}
+                            onCancel={onCancel}
+                        />
+                    )}
+                </Route>
+            </Switch>
+        </Router>
     )
 };

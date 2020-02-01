@@ -12,7 +12,8 @@ module.exports = merge(base, {
                 target: "http://localhost:9000",
                 pathRewrite: { "^/.netlify/functions": "" }
             }
-        }
+        },
+        historyApiFallback: true
     },
     watchOptions: {
         aggregateTimeout: 300,
