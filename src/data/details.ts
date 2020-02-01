@@ -9,5 +9,5 @@ export interface IWhiskyDetails {
 }
 
 export const getDetails = (id: string) => axios
-    .get<IWhiskyDetails[]>(`/.netlify/functions/details?id=${id}`)
+    .get<IWhiskyDetails>(`/.netlify/functions/details?id=${id}`)
     .then(results => results.data);
