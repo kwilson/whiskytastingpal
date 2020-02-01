@@ -1,9 +1,9 @@
 import { Reducer } from 'react';
 
 import { ActionTypes, SEARCH, SEARCH_COMPLETE } from './actions';
-import { ISearchResult } from './App';
+import { ISearchResult } from '../../data';
 
-interface IState {
+export interface IState {
     results: ISearchResult[] | null;
     isLoading: boolean;
 }

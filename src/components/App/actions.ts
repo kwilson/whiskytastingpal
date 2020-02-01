@@ -1,4 +1,4 @@
-import { ISearchResult } from './App';
+import { ISearchResult } from '../../data';
 
 export const SEARCH = Symbol('SEARCH');
 export const SEARCH_COMPLETE = Symbol('SEARCH_COMPLETE');
