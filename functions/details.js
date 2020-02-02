@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { load } from 'cheerio';
 
-const getFullUrl = partial => `https://www.masterofmalt.com/${partial}`;
+const getFullUrl = partial => `https://www.masterofmalt.com${partial}`;
 
 /**
  * @param {string} label
@@ -22,9 +22,11 @@ const getNote = (note) => {
         };
     }
 
+    console.log({ note });
+
     return {
-        title: '',
-        value: note.text()
+        title: null,
+        value: load(note).text()
     };
 };
 
