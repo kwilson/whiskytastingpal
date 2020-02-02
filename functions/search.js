@@ -29,31 +29,38 @@ const mapResult = result => {
 };
 
 export const handler = (event, context, callback) => {
-    const { terms } = event.queryStringParameters;
-    instance.post(
-        '/api/search/products/-1/true/464/0/',
-        getQueryBody(terms), {
-        params: {
-            searchTerm: terms,
-            page: 1,
-            searchProductTypes: false,
-            searchBrands: false,
-            searchAges: false,
-        },
-    })
-        .then(response => {
-            callback(null, {
-                statusCode: response.status,
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(response.data.body.map(mapResult)),
-            });
+    try {
+        const { terms } = event.queryStringParameters;
+        instance.post(
+            '/api/search/products/-1/true/464/0/',
+            getQueryBody(terms), {
+            params: {
+                searchTerm: terms,
+                page: 1,
+                searchProductTypes: false,
+                searchBrands: false,
+                searchAges: false,
+            },
         })
-        .catch(error => {
-            callback({
-                statusCode: 500,
-                body: error
+            .then(response => {
+                callback(null, {
+                    statusCode: response.status,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(response.data.body.map(mapResult)),
+                });
+            })
+            .catch(error => {
+                callback({
+                    statusCode: 500,
+                    body: error
+                });
             });
+    } catch (error) {
+        callback({
+            statusCode: 500,
+            body: error
         });
+    }
 };

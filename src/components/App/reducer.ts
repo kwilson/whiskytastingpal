@@ -1,18 +1,20 @@
 import { Reducer } from 'react';
 
-import { ActionTypes, SEARCH, SEARCH_COMPLETE, CLEAR_SEARCH } from './actions';
+import { ActionTypes, SEARCH, SEARCH_COMPLETE, CLEAR_SEARCH, SEARCH_FAILED } from './actions';
 import { ISearchResult } from '../../data';
 
 export interface IState {
     terms: string | null;
     results: ISearchResult[] | null;
     isLoading: boolean;
+    error: any | null;
 }
 
 export const INITIAL_STATE: IState = {
     isLoading: false,
     results: null,
-    terms: null
+    terms: null,
+    error: null
 };
 
 export const reducer: Reducer<IState, ActionTypes> = (state = INITIAL_STATE, action) => {
@@ -22,7 +24,8 @@ export const reducer: Reducer<IState, ActionTypes> = (state = INITIAL_STATE, act
                 ...state,
                 terms: action.payload.terms,
                 results: null,
-                isLoading: true
+                isLoading: true,
+                error: null
             };
 
         case SEARCH_COMPLETE:
@@ -32,12 +35,20 @@ export const reducer: Reducer<IState, ActionTypes> = (state = INITIAL_STATE, act
                 isLoading: false
             };
 
+        case SEARCH_FAILED:
+            return {
+                ...state,
+                error: action.payload.error,
+                isLoading: false,
+            };
+
         case CLEAR_SEARCH:
             return {
                 ...state,
                 terms: null,
                 results: null,
-                isLoading: false
+                isLoading: false,
+                error: null
             };
 
         default:

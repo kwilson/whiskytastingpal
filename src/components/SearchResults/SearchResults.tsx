@@ -67,7 +67,7 @@ export const SearchResults: React.FunctionComponent<IProps> = ({
     return (
         <div className="container SearchResults">
             {results.length === 0
-                ? <p>Sorry, nothing found.</p>
+                ? <p className="content has-text-centered">Sorry, nothing found.</p>
                 : results.map((x) => <SearchResult searchResult={x} key={x.url} />)}
 
             <hr />
