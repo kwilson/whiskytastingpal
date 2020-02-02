@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "lib": [
+            "dom",
+            "dom.iterable",
+            "esnext"
+        ],
+        "esModuleInterop": true,
+        "jsx": "react",
+        "noEmitOnError": true,
+        "noUnusedLocals": true,
+        "strict": true,
+    },
+    "include": [
+        "src/**/*"
+    ]
+}

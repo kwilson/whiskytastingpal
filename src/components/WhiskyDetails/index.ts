@@ -1,0 +1,1 @@
+export { WhiskyDetails } from './WhiskyDetails';

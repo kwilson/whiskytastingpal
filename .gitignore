@@ -1,2 +1,5 @@
 __pycache__
 .DS_Store
+dist
+lambda
+node_modules
