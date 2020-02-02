@@ -13,61 +13,69 @@ const Meta: React.FunctionComponent<{ label: string, value: string }> = ({
     label,
     value
 }) => (
-    <>
-        <dt className="search-result__meta-label">{label}</dt>
-        <dt className="search-result__meta-value">{value}</dt>
-    </>
-)
+        <>
+            <dt className="search-result__meta-label">{label}</dt>
+            <dt className="search-result__meta-value">{value}</dt>
+        </>
+    )
 
 const SearchResult: React.FunctionComponent<{
     searchResult: ISearchResult,
 }> = ({
     searchResult,
 }) => {
-    const getImageUrl = (url: string) => 'https://www.masterofmalt.com' + url.replace('IMAGEPRESET', '2812');
+        const getImageUrl = (url: string) => 'https://www.masterofmalt.com' + url.replace('IMAGEPRESET', '2812');
 
-    const meta = [
-        { label: 'ABV', value: `${searchResult.abv}%` },
-        { label: 'Distillery', value: searchResult.distillery}
-    ].map(({ label, value }) => (
-        <Meta key={label} label={label} value={value} />
-    ));
+        const meta = [
+            { label: 'ABV', value: `${searchResult.abv}%` },
+            { label: 'Distillery', value: searchResult.distillery }
+        ].map(({ label, value }) => (
+            <Meta key={label} label={label} value={value} />
+        ));
 
-    return (
-        <Link to={searchResult.url} className="box search-result">
-            <article className="media search-result">
-                <div className="search-result__image">
-                    <figure className="image">
-                        <img
-                            className="bottle__image"
-                            src={getImageUrl(searchResult.image)}
-                            alt=""
-                        />
-                    </figure>
-                </div>
-                <div className="search-result__content">
-                    <h2 className="title is-5">{searchResult.title}</h2>
+        return (
+            <Link to={searchResult.url} className="box search-result">
+                <article className="media search-result">
+                    <div className="search-result__image">
+                        <figure className="image">
+                            <img
+                                className="bottle__image"
+                                src={getImageUrl(searchResult.image)}
+                                alt=""
+                            />
+                        </figure>
+                    </div>
+                    <div className="search-result__content">
+                        <h2 className="title is-5">{searchResult.title}</h2>
                         <dl className="search-result__meta">
                             {meta}
                         </dl>
-                </div>
-            </article>
-        </Link>
-    );
-};
+                    </div>
+                </article>
+            </Link>
+        );
+    };
 
 export const SearchResults: React.FunctionComponent<IProps> = ({
     results,
     onCancel
-}) => results ? (
-    <div className="container SearchResults">
-        {results.map((x) => <SearchResult searchResult={x} key={x.url} />)}
+}) => {
+    if (!results) {
+        return null;
+    }
 
-        <hr />
+    return (
+        <div className="container SearchResults">
+            {results.length === 0
+                ? <p>Sorry, nothing found.</p>
+                : results.map((x) => <SearchResult searchResult={x} key={x.url} />)}
 
-        <button
-            className="button"
-            onClick={onCancel}
-        >Clear</button>
-    </div>
-) : null;
+            <hr />
+
+            <button
+                className="button"
+                onClick={onCancel}
+            >Clear</button>
+        </div>
+    );
+};

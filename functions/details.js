@@ -56,20 +56,21 @@ const getDescription = (descriptionNode) => {
     return null;
 }
 
-const parse = html => {
+const parse = (html, url) => {
     const $ = load(html);
     const title = $('h1').text().trim();
     const notes = $('p[id$="TastingNote"]');
-    const img = $('img[id$="imgProductBig"]').attr('src');
+    const image = $('img[id$="imgProductBig"]').attr('src');
     const description = getDescription($('[itemprop="description"]'));
     const rating = getRating($('[itemprop="ratingValue"]'));
 
     return {
         title,
         notes: notes.toArray().map(getNote),
-        img,
+        image,
         description,
-        rating
+        rating,
+        url
     };
 };
 
@@ -78,7 +79,7 @@ export const handler = (event, context, callback) => {
     const url = getFullUrl(id);
     axios.get(url)
         .then(({ status, data }) => {
-            const parsed = parse(data);
+            const parsed = parse(data, url);
 
             callback(null, {
                 statusCode: status,
