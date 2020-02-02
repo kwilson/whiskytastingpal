@@ -55,7 +55,7 @@
   "short_name": "WTP",
   "orientation": "portrait",
   "display": "standalone",
-  "start_url": "https://whisky.partcoffee.com/",
+  "start_url": "http://whiskytastingpal.com/",
   "dir": "ltr",
   "lang": "English",
   "scope": "/",
