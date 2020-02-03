@@ -12,6 +12,8 @@ export const WhiskyDetails: React.FunctionComponent<{}> = () => {
     const [details, setDetails] = React.useState<IWhiskyDetails | null>(null);
     const [isLoading, setIsLoading] = React.useState(false);
 
+    const showBackButton = Boolean(details) && !isLoading;
+
     React.useEffect(() => {
         setIsLoading(true);
 
@@ -60,7 +62,7 @@ export const WhiskyDetails: React.FunctionComponent<{}> = () => {
 
                 <hr className="Details__divider" />
 
-                {!isLoading && (
+                {showBackButton && (
                     <Link to="/" className="button is-primary">Back to search results</Link>
                 )}
             </article>
