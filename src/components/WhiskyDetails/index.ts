@@ -1,1 +1,1 @@
-export { WhiskyDetails } from './WhiskyDetails';
+export { WhiskyDetails as default } from './WhiskyDetails';
