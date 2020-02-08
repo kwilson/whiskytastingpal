@@ -86,7 +86,7 @@ export const WhiskyDetails: React.FunctionComponent<{}> = () => {
                 {showButtons && (
                     <div className="Details__buttons">
                         <Link to="/" className="button is-primary buttons--back">Back to search results</Link>
-                        <ShareButton url={`https://whiskytasting.pal.com/${url}`} />
+                        <ShareButton title={details?.title} url={`https://whiskytasting.pal.com/${url}`} />
                     </div>
                 )}
             </article>
