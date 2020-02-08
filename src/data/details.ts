@@ -7,6 +7,7 @@ export interface IWhiskyDetails {
     description: string;
     rating: string;
     url: string;
+    meta: Array<{ label: string, value: string }>;
 }
 
 export const getDetails = (id: string) => axios

@@ -11,6 +11,7 @@ export const WhiskyDetails: React.FunctionComponent<{}> = () => {
     const { url } = useRouteMatch();
     const [details, setDetails] = React.useState<IWhiskyDetails | null>(null);
     const [isLoading, setIsLoading] = React.useState(false);
+    const hasMeta = details?.meta?.length;
 
     const showBackButton = Boolean(details) && !isLoading;
 
@@ -53,6 +54,25 @@ export const WhiskyDetails: React.FunctionComponent<{}> = () => {
                             <img className="Details__image" src={details.image} alt="" />
 
                         </div>
+
+                        {hasMeta && (
+                            <>
+                                <hr className="Details__divider" />
+
+                                <div className="Details__content content">
+                                    <h2 className="title is-5">Details</h2>
+
+                                    <dl className="Details__meta">
+                                        {details.meta.map(({ label, value }) => (
+                                            <React.Fragment key={label}>
+                                                <dt>{label}</dt>
+                                                <dd>{value}</dd>
+                                            </React.Fragment>
+                                        ))}
+                                    </dl>
+                                </div>
+                            </>
+                        )}
 
                         <hr className="Details__divider" />
 

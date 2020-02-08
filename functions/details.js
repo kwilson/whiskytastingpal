@@ -45,18 +45,35 @@ const getRating = (ratingNode) => {
 }
 
 /**
- * @param {Cheerio} descriptionNode
+ * @param {Cheerio} node
  */
-const getDescription = (descriptionNode) => {
-    if (descriptionNode) {
-        const content = descriptionNode.text();
-        if (content) {
-            return content.trim();
+const getTextValue = node => {
+    try {
+        if (node) {
+            const content = node.text();
+            if (content) {
+                return content.trim();
+            }
         }
-    }
+    } catch { }
 
     return null;
 }
+
+/**
+ * @param {Cheerio} descriptionNode
+ */
+const getDescription = (descriptionNode) => getTextValue(descriptionNode);
+
+const metaKeys = [
+    { label: 'Origin', key: 'wdCountry' },
+    { label: 'Region', key: 'wdRegion' },
+    { label: 'Style', key: 'wdStyle' },
+    { label: 'Distillery', key: 'wdDistillery' },
+    { label: 'Bottler', key: 'wdBottler' },
+    { label: 'ABV', key: 'wdAlcohol' },
+    { label: 'Volume', key: 'wdVolume' },
+];
 
 const parse = (html, url) => {
     const $ = load(html);
@@ -66,13 +83,26 @@ const parse = (html, url) => {
     const description = getDescription($('[itemprop="description"]'));
     const rating = getRating($('[itemprop="ratingValue"]'));
 
+    const meta = metaKeys.reduce((metaValues, { label, key }) => {
+        const value = getTextValue($(`[id$="${key}"] > .kv-val`));
+        if (value) {
+            return [...metaValues, {
+                label,
+                value
+            }];
+        }
+
+        return metaValues;
+    }, []);
+
     return {
         title,
         notes: notes.toArray().map(getNote),
         image,
         description,
         rating,
-        url
+        url,
+        meta
     };
 };
 
