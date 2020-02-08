@@ -6,6 +6,7 @@ import { IWhiskyDetails } from '../../data/details';
 
 import './WhiskyDetails.scss';
 import { Loader } from '../Loader';
+import { ShareButton } from '../ShareButton';
 
 export const WhiskyDetails: React.FunctionComponent<{}> = () => {
     const { url } = useRouteMatch();
@@ -13,7 +14,7 @@ export const WhiskyDetails: React.FunctionComponent<{}> = () => {
     const [isLoading, setIsLoading] = React.useState(false);
     const hasMeta = details?.meta?.length;
 
-    const showBackButton = Boolean(details) && !isLoading;
+    const showButtons = Boolean(details) && !isLoading;
 
     React.useEffect(() => {
         setIsLoading(true);
@@ -82,8 +83,11 @@ export const WhiskyDetails: React.FunctionComponent<{}> = () => {
 
                 <hr className="Details__divider" />
 
-                {showBackButton && (
-                    <Link to="/" className="button is-primary">Back to search results</Link>
+                {showButtons && (
+                    <div className="Details__buttons">
+                        <Link to="/" className="button is-primary buttons--back">Back to search results</Link>
+                        <ShareButton url={`https://whiskytasting.pal.com/${url}`} />
+                    </div>
                 )}
             </article>
         </section>
