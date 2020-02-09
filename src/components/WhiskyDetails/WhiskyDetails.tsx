@@ -8,8 +8,8 @@ import './WhiskyDetails.scss';
 import { Loader } from '../Loader';
 import { ShareButton } from '../ShareButton';
 
-const siteTitle: string = process.env.SITE_TITLE;
-const siteBaseUrl: string = process.env.URL;
+const siteTitle = process.env.SITE_TITLE;
+const siteBaseUrl = process.env.URL;
 
 export const WhiskyDetails: React.FunctionComponent<{}> = () => {
     const { url } = useRouteMatch();
