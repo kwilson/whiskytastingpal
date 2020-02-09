@@ -8,6 +8,9 @@ import './WhiskyDetails.scss';
 import { Loader } from '../Loader';
 import { ShareButton } from '../ShareButton';
 
+const siteTitle: string = process.env.SITE_TITLE;
+const siteBaseUrl: string = process.env.URL;
+
 export const WhiskyDetails: React.FunctionComponent<{}> = () => {
     const { url } = useRouteMatch();
     const [details, setDetails] = React.useState<IWhiskyDetails | null>(null);
@@ -86,7 +89,7 @@ export const WhiskyDetails: React.FunctionComponent<{}> = () => {
                 {showButtons && (
                     <div className="Details__buttons">
                         <Link to="/" className="button is-primary buttons--back">Back to search results</Link>
-                        <ShareButton title={details?.title} url={`https://whiskytasting.pal.com/${url}`} />
+                        <ShareButton title={siteTitle} text={details?.title} url={`${siteBaseUrl}${url}`} />
                     </div>
                 )}
             </article>
