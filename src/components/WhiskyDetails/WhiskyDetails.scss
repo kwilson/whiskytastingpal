@@ -28,8 +28,8 @@
 
     &__meta {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-column-gap: 1rem;
+        grid-template-columns: 1fr 2fr;
+        grid-column-gap: .6rem;
 
         dt {
             font-weight: bold;
@@ -43,6 +43,18 @@
         dd {
             margin-left: 0;
             text-align: left;
+        }
+    }
+
+    &__buttons {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .buttons--back {
+        &::before {
+            content: '< ';
         }
     }
 }
