@@ -9,7 +9,7 @@
         "build:web": "webpack",
         "build:functions": "netlify-lambda build ./functions",
         "start": "npm-run-all --parallel start:*",
-        "start:web": "webpack-dev-server --config webpack.dev.js --open",
+        "start:web": "webpack-dev-server --config webpack.dev.js",
         "start:functions": "netlify-lambda serve ./functions",
         "tsc": "tsc --project tsconfig.json --noEmit",
         "test": "echo \"Error: no test specified\" && exit 1"
@@ -29,7 +29,11 @@
         "@babel/preset-env": "^7.8.4",
         "@babel/preset-react": "^7.8.3",
         "@babel/preset-typescript": "^7.8.3",
+        "@fortawesome/fontawesome-svg-core": "^1.2.27",
+        "@fortawesome/free-solid-svg-icons": "^5.12.1",
+        "@fortawesome/react-fontawesome": "^0.1.8",
         "@types/cheerio": "^0.22.16",
+        "@types/lodash": "^4.14.149",
         "@types/react-dom": "^16.9.5",
         "@types/react-router-dom": "^5.1.3",
         "babel-loader": "^8.0.6",
@@ -53,6 +57,7 @@
         "webpack-merge": "^4.2.2"
     },
     "dependencies": {
+        "@fortawesome/free-regular-svg-icons": "^5.12.1",
         "axios": "^0.19.2",
         "bulma": "^0.8.0",
         "cheerio": "^1.0.0-rc.3",
