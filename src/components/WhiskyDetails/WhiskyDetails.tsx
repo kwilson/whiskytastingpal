@@ -6,6 +6,7 @@ import { IWhiskyDetails } from '../../data/details';
 
 import './WhiskyDetails.scss';
 import { Loader } from '../Loader';
+import { Rating } from '../Rating';
 
 export const WhiskyDetails: React.FunctionComponent<{}> = () => {
     const { url } = useRouteMatch();
@@ -62,14 +63,28 @@ export const WhiskyDetails: React.FunctionComponent<{}> = () => {
                                 <div className="Details__content content">
                                     <h2 className="title is-5">Details</h2>
 
-                                    <dl className="Details__meta">
+                                    <dd className="Details__meta">
                                         {details.meta.map(({ label, value }) => (
                                             <React.Fragment key={label}>
                                                 <dt>{label}</dt>
                                                 <dd>{value}</dd>
                                             </React.Fragment>
                                         ))}
-                                    </dl>
+                                    </dd>
+                                </div>
+                            </>
+                        )}
+
+
+                        {details.rating && (
+                            <>
+                                <hr className="Details__divider" />
+                                <div className="Details__rating">
+                                    <h2 className="title is-5">Rating</h2>
+
+                                    <div className="Details__rating-value">
+                                        <Rating rating={Number(details.rating)} />
+                                    </div>
                                 </div>
                             </>
                         )}

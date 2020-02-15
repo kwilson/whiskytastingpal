@@ -22,8 +22,6 @@ const getNote = (note) => {
         };
     }
 
-    console.log({ note });
-
     return {
         title: null,
         value: load(note).text()
