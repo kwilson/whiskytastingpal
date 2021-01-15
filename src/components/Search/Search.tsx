@@ -21,10 +21,11 @@ export const Search: React.StatelessComponent<IProps> = ({ onSubmit }) => {
                         placeholder="Search for a whisky"
                         value={terms}
                         onChange={e => updateTerms(e.target.value)}
+                        data-testId="search-input"
                     />
                 </div>
                 <div className="control">
-                    <button className="button is-info">
+                    <button className="button is-info" data-testId="search-button">
                         Search
                     </button>
                 </div>
