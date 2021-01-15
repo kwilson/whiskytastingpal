@@ -75,7 +75,7 @@ const metaKeys = [
 
 const parse = (html, url) => {
     const $ = load(html);
-    const title = $('h1').text().trim();
+    const title = $('h1.page_header').text().trim();
     const notes = $('p[id$="TastingNote"]');
     const image = $('img[id$="imgProductBig"]').attr('src');
     const description = getDescription($('[itemprop="description"]'));
