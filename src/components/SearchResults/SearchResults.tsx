@@ -34,7 +34,7 @@ const SearchResult: React.FunctionComponent<{
         ));
 
         return (
-            <Link to={searchResult.url} className="box search-result">
+            <Link data-testId="search-result" to={searchResult.url} className="box search-result">
                 <article className="media search-result">
                     <div className="search-result__image">
                         <figure className="image">
@@ -46,7 +46,7 @@ const SearchResult: React.FunctionComponent<{
                         </figure>
                     </div>
                     <div className="search-result__content">
-                        <h2 className="title is-5">{searchResult.title}</h2>
+                        <h2 data-testId="title" className="title is-5">{searchResult.title}</h2>
                         <dl className="search-result__meta">
                             {meta}
                         </dl>
