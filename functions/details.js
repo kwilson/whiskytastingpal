@@ -104,10 +104,25 @@ const parse = (html, url) => {
     };
 };
 
+const instance = axios.create({
+    headers: {
+        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+        "accept-language": "en-GB,en;q=0.9",
+        "accept-encoding": "gzip, deflate, br",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+        "connection": "keep-alive",
+        "sec-fetch-dest": "document",
+        "sec-fetch-mode": "navigate",
+        "sec-fetch-site": "same-origin",
+        "sec-fetch-user": "?1",
+        "upgrade-insecure-requests": "1",
+    },
+});
+
 export const handler = (event, context, callback) => {
     const { id } = event.queryStringParameters;
     const url = getFullUrl(id);
-    axios.get(url)
+    instance.get(url)
         .then(({ status, data }) => {
             const parsed = parse(data, url);
 
